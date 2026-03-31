@@ -340,7 +340,7 @@ class JoinHandle:
             join_welcome = await self.db.get(gid, "join_welcome")
             if join_welcome:
                 nickname = await get_nickname(event, uid)
-                welcome = join_welcome.format(nickname=nickname)
+                welcome = join_welcome.replace("{nickname}", nickname).replace("{qq}", uid)
                 chain = MessageChain(chain=parse_cq_to_chain(welcome))
                 await event.send(chain)
             # 进群禁言
